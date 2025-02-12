@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Menu, X, User, LayoutDashboard, Package, ShoppingCart, Users, Settings } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, User, LayoutDashboard, Package, ShoppingCart, Users, Settings } from 'lucide-react';
 import Link from 'next/link';
 
 const Navbar = () => {
