@@ -1,75 +1,158 @@
-'use client';
+// app/page.tsx
+'use client'
 
-import { motion } from 'framer-motion';
-import { Menu, User, LayoutDashboard, Package, ShoppingCart, Users, Settings } from 'lucide-react';
-import Link from 'next/link';
+import { motion } from 'framer-motion'
+import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis, ResponsiveContainer } from 'recharts'
+import { toast } from 'sonner'
+import { ShoppingCart, Package, DollarSign } from 'lucide-react'
 
-const Navbar = () => {
+const lineChartData = [
+  { name: 'Jan', uv: 400, pv: 2400 },
+  { name: 'Feb', uv: 300, pv: 1398 },
+  { name: 'Mar', uv: 200, pv: 9800 },
+  { name: 'Apr', uv: 278, pv: 3908 },
+  { name: 'May', uv: 189, pv: 4800 },
+  { name: 'Jun', uv: 239, pv: 3800 },
+]
 
+const barChartData = [
+  { name: 'Mon', orders: 40 },
+  { name: 'Tue', orders: 32 },
+  { name: 'Wed', orders: 47 },
+  { name: 'Thu', orders: 20 },
+  { name: 'Fri', orders: 34 },
+  { name: 'Sat', orders: 45 },
+  { name: 'Sun', orders: 38 },
+]
+
+const topSellingProducts = [
+  { name: 'Apple AirPods Pro', sales: 1200 },
+  { name: 'Sony WH-1000XM4', sales: 950 },
+  { name: 'Apple MacBook Air', sales: 730 },
+  { name: 'Samsung Galaxy S21', sales: 680 },
+]
+
+export default function Home() {
   return (
-    <div className="flex h-screen overflow-hidden">
-      {/* Sidebar */}
-      <motion.aside 
-        transition={{ duration: 0.3 }}
-        className='bg-base-200  w-48 p-4 fixed h-full shadow-lg  z-50 transition-all duration-300'>
-        <ul className="flex flex-col gap-4 mt-32">
-          <li><Link href="/dashboard" className="btn btn-ghost flex items-center gap-2"><LayoutDashboard size={20} /> Dashboard</Link></li>
-          <li><Link href="/products" className="btn btn-ghost flex items-center gap-2"><Package size={20} /> Products</Link></li>
-          <li><Link href="/orders" className="btn btn-ghost flex items-center gap-2"><ShoppingCart size={20} /> Orders</Link></li>
-          <li><Link href="/customers" className="btn btn-ghost flex items-center gap-2"><Users size={20} /> Customers</Link></li>
-          <li><Link href="/settings" className="btn btn-ghost flex items-center gap-2"><Settings size={20} /> Settings</Link></li>
-        </ul>
-      </motion.aside>
+    <div className="space-y-6">
+      {/* Top stats cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <motion.div 
+          className="bg-white rounded-lg shadow p-4 flex items-center space-x-4"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div className="p-3 bg-blue-100 text-blue-600 rounded-md">
+            <DollarSign className="h-6 w-6" />
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">Total Sales</p>
+            <p className="text-xl font-semibold">$58,728.35</p>
+          </div>
+        </motion.div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col ml-48">
-        {/* Navbar */}
-        <nav className="bg-base-200 shadow-md p-4 flex justify-between items-center">
-          {/* Sidebar Toggle Button */}
-          <button className="lg:hidden">
-            <Menu size={24} />
+        <motion.div 
+          className="bg-white rounded-lg shadow p-4 flex items-center space-x-4"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <div className="p-3 bg-green-100 text-green-600 rounded-md">
+            <ShoppingCart className="h-6 w-6" />
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">Total Orders</p>
+            <p className="text-xl font-semibold">34,906</p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          className="bg-white rounded-lg shadow p-4 flex items-center space-x-4"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="p-3 bg-orange-100 text-orange-600 rounded-md">
+            <Package className="h-6 w-6" />
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">Revenue</p>
+            <p className="text-xl font-semibold">$45,624.92</p>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Charts section */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Line chart */}
+        <div className="bg-white rounded-lg shadow p-4 col-span-2">
+          <h2 className="text-lg font-semibold mb-4">Orders Over Time</h2>
+          <div className="w-full h-64">
+            <ResponsiveContainer>
+              <LineChart data={lineChartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="uv" stroke="#8884d8" strokeWidth={2} />
+                <Line type="monotone" dataKey="pv" stroke="#82ca9d" strokeWidth={2} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Bar chart */}
+        <div className="bg-white rounded-lg shadow p-4">
+          <h2 className="text-lg font-semibold mb-4">Weekly Orders</h2>
+          <div className="w-full h-64">
+            <ResponsiveContainer>
+              <BarChart data={barChartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="orders" fill="#8884d8" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+
+      {/* Table and notification demo */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white rounded-lg shadow p-4">
+          <h2 className="text-lg font-semibold mb-4">Top Selling Products</h2>
+          <table className="min-w-full text-left">
+            <thead>
+              <tr className="border-b text-gray-600">
+                <th className="py-2">Product</th>
+                <th className="py-2">Sales</th>
+              </tr>
+            </thead>
+            <tbody>
+              {topSellingProducts.map((product) => (
+                <tr key={product.name} className="border-b last:border-b-0">
+                  <td className="py-2">{product.name}</td>
+                  <td className="py-2">{product.sales}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Sonner notification button */}
+        <div className="bg-white rounded-lg shadow p-4 flex items-center justify-center">
+          <button
+            onClick={() => toast.success('This is a Sonner notification!')}
+            className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
+          >
+            Show Notification
           </button>
-
-          {/* Logo / Brand Name */}
-          <Link href="/" className="text-xl font-bold text-primary">
-            Admin Dashboard
-          </Link>
-
-          {/* Mobile Menu Button */}
-          {/* <button className="lg:hidden">
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button> */}
-
-          {/* Navigation Links */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3 }}
-            className={`absolute lg:relative top-16 right-4 lg:top-0 lg:right-0 bg-base-100 lg:bg-transparent shadow-lg lg:shadow-none p-4 rounded-lg lg:flex lg:items-center`}>
-            <ul className="flex flex-col lg:flex-row gap-4">
-              <li><Link href="/dashboard" className="btn btn-ghost">Dashboard</Link></li>
-              <li><Link href="/products" className="btn btn-ghost">Products</Link></li>
-              <li><Link href="/orders" className="btn btn-ghost">Orders</Link></li>
-              <li><Link href="/customers" className="btn btn-ghost">Customers</Link></li>
-              <li><Link href="/settings" className="btn btn-ghost">Settings</Link></li>
-            </ul>
-          </motion.div>
-
-          {/* Profile Icon */}
-          <Link href="/profile" className="hidden lg:block btn btn-circle btn-outline">
-            <User size={20} />
-          </Link>
-        </nav>
-
-        {/* Page Content */}
-        <div className="flex-1 p-6 overflow-auto">
-          {/* Your main dashboard content will go here */}
-          <h1 className="text-2xl font-bold">Welcome to Admin Dashboard</h1>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
 
