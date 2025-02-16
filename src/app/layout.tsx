@@ -28,10 +28,10 @@ export default function RootLayout({
             <h1 className="text-2xl font-bold mb-8">EcomMaster</h1>
             <nav>
               <ul className="space-y-4">
-                <Link href='/' className="text-gray-700 font-semibold">Dashboard</li>
+                <Link href='/' className="text-gray-700 font-semibold">Dashboard</Link>
                 <Link href='/products' className="text-gray-600 hover:text-gray-800">Products</Link>
-                <Link href='/orders' className="text-gray-600 hover:text-gray-800">Orders</li>
-                <Link href='/users' className="text-gray-600 hover:text-gray-800">Users</li>
+                <Link href='/orders' className="text-gray-600 hover:text-gray-800">Orders</Link>
+                <Link href='/users' className="text-gray-600 hover:text-gray-800">Users</Link>
               </ul>
             </nav>
           </aside>
