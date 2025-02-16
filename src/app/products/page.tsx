@@ -72,11 +72,11 @@ const productsData = [
   },
 ]
 
-const STATUSES = {
-  Active: 'bg-green-100 text-green-600',
-  Scheduled: 'bg-blue-100 text-blue-600',
-  Disabled: 'bg-gray-100 text-gray-600',
-}
+// const STATUSES = {
+//   Active: 'bg-green-100 text-green-600',
+//   Scheduled: 'bg-blue-100 text-blue-600',
+//   Disabled: 'bg-gray-100 text-gray-600',
+// }
 
 export default function ProductsPage() {
   // For demonstration, we’ll do basic pagination
@@ -142,8 +142,9 @@ export default function ProductsPage() {
                 <th className="py-2 text-right">Actions</th>
               </tr>
             </thead>
+            {/* idx */}
             <tbody className="text-sm">
-              {pageItems.map((product, idx) => (
+              {pageItems.map((product) => (
                 <tr key={product.id} className="border-b last:border-0">
                   <td className="py-3">{product.id}</td>
                   <td className="py-3 flex items-center space-x-2">
