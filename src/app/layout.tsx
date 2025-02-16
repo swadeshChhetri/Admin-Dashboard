@@ -1,7 +1,8 @@
 // app/layout.tsx
 import '../styles/globals.css';
-import { Inter } from 'next/font/google'
-import { Toaster } from 'sonner'
+import { Inter } from 'next/font/google';
+import { Toaster } from 'sonner';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,11 +28,10 @@ export default function RootLayout({
             <h1 className="text-2xl font-bold mb-8">EcomMaster</h1>
             <nav>
               <ul className="space-y-4">
-                <li className="text-gray-700 font-semibold">Dashboard</li>
-                <li className="text-gray-600 hover:text-gray-800">Products</li>
-                <li className="text-gray-600 hover:text-gray-800">Orders</li>
-                <li className="text-gray-600 hover:text-gray-800">Reports</li>
-                <li className="text-gray-600 hover:text-gray-800">Statistics</li>
+                <Link href='/' className="text-gray-700 font-semibold">Dashboard</li>
+                <Link href='/products' className="text-gray-600 hover:text-gray-800">Products</Link>
+                <Link href='/orders' className="text-gray-600 hover:text-gray-800">Orders</li>
+                <Link href='/users' className="text-gray-600 hover:text-gray-800">Users</li>
               </ul>
             </nav>
           </aside>
