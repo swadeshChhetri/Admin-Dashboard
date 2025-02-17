@@ -26,8 +26,8 @@ export default function RootLayout({
           {/* Sidebar */}
           <aside className="w-64 bg-white border-r p-6 hidden md:block">
             <h1 className="text-2xl font-bold mb-8">EcomMaster</h1>
-            <nav>
-              <ul className="space-y-4">
+            <nav className=''>
+              <ul className="space-y-4 flex flex-col">
                 <Link href='/' className="text-gray-700 font-semibold">Dashboard</Link>
                 <Link href='/products' className="text-gray-600 hover:text-gray-800">Products</Link>
                 <Link href='/orders' className="text-gray-600 hover:text-gray-800">Orders</Link>
